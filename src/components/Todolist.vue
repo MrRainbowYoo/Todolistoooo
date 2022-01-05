@@ -18,6 +18,8 @@
                             @hideEditor="showEditor = false"
                             @setNewMsg="setNewMsg" />
         </transition>
+
+        <TheMessage />
     </div>
 </template>
 
@@ -25,6 +27,7 @@
 import TodolistInput from './TodolistInput'
 import TodolistItem from './TodolistItem'
 import TodolistFilter from './TodolistFilter'
+import TheMessage from './TheMessage'
 
 const TodolistEditor = () => import('./TodolistEditor')
 
@@ -42,7 +45,8 @@ export default {
         TodolistInput,
         TodolistItem,
         TodolistFilter,
-        TodolistEditor
+        TodolistEditor,
+        TheMessage
     },
     methods: {
         getNowTime(){
@@ -70,12 +74,16 @@ export default {
             this.save()
         },
         deleteItem(id){
-            let opt = confirm('确认删除该项吗？')
-            if(opt) {
+            this.$message({
+                msg: "确定要删除吗？",
+                showCancel: true
+            }).then(()=>{
                 const filterArr = this.items.filter(item => item.id != id)
                 this.items = filterArr
                 this.save()
-            }
+            }).catch((reason)=>{
+                console.log(reason)
+            })
         },
         completeItem(id){
             let index = this.items.findIndex(x => x.id === id)
@@ -100,7 +108,13 @@ export default {
             this.save()
         },
         init(){
-            this.items = JSON.parse(localStorage.getItem('clq'))
+            // 若第一次使用，不存在localstorage需要初始化
+            let store = localStorage.getItem('clq')
+            if(store)
+                this.items = JSON.parse(store)
+            else
+                this.save()
+            // this.items = JSON.parse(localStorage.getItem('clq'))
         },
         save(){
             localStorage.setItem('clq',JSON.stringify(this.items))

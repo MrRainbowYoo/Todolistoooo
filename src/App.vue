@@ -29,7 +29,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   
-  color: #335eea;
+  /* color: #335eea; */
   height: 100vh;
   overflow: auto;
   background-color: #ecf0f1;

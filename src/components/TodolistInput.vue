@@ -1,5 +1,5 @@
 <template>
-    <input type="text" placeholder="你要做什么..." class="todolist-input" :value="value" @input="$emit('input',$event.target.value)" @keyup.enter="addItem">
+    <input type="text" placeholder="你要做什么..." class="todolist-input" :value="value" @input="$emit('input',$event.target.value)" @keyup.enter="addItem" ref="myInput">
 </template>
 
 <script>
@@ -7,10 +7,12 @@ export default {
     methods: {
         addItem(){
             this.checkInput() && this.$emit('addItem')
+            // 回车后失去焦点，防止多次回车产生重复的message
+            this.$refs.myInput.blur()
         },
         checkInput(){
-            if(this.value.replace(/^[ ]+$/g,"").length==0){
-                alert('请好好填写！')
+            if(this.value.replace(/^[ ]+$/g,"").length == 0){
+                this.$message()
                 return false
             }
             return true

@@ -1,6 +1,7 @@
 <template>
     <div class="todolist-editor">
         <div class="todolist-editor-wrap">
+            <span class="title-editor">修改</span>
             <span class="close-editor" @click="$emit('hideEditor')">X</span>
             <TodolistInput v-model="newMsg" class="editor-input"/>
             <div class="btns">
@@ -24,8 +25,8 @@ export default {
     props: [ 'msg' ],
     methods: {
         checkInput(){
-            if(this.newMsg.replace(/^[ ]+$/g,"").length==0){
-                alert('请好好填写！')
+            if(this.newMsg.replace(/^[ ]+$/g,"").length == 0){
+                this.$message()
                 return false
             }
             return true
@@ -58,12 +59,21 @@ export default {
             align-items: center;
             flex-wrap: wrap;
 
+            .title-editor {
+                position: absolute;
+                left: 1rem;
+                top: 1rem;
+                cursor: default;
+                color: #7f8c8d;
+                font-size: 1.1rem;
+            }
+
             .close-editor {
                 position: absolute;
                 right: 1rem;
                 top: 1rem;
                 cursor: pointer;
-                color: #7f8c8d;
+                color: #333;
             }
         }
 
