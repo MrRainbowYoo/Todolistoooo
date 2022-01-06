@@ -18,8 +18,6 @@
                             @hideEditor="showEditor = false"
                             @setNewMsg="setNewMsg" />
         </transition>
-
-        <TheMessage />
     </div>
 </template>
 
@@ -27,7 +25,6 @@
 import TodolistInput from './TodolistInput'
 import TodolistItem from './TodolistItem'
 import TodolistFilter from './TodolistFilter'
-import TheMessage from './TheMessage'
 
 const TodolistEditor = () => import('./TodolistEditor')
 
@@ -45,8 +42,7 @@ export default {
         TodolistInput,
         TodolistItem,
         TodolistFilter,
-        TodolistEditor,
-        TheMessage
+        TodolistEditor
     },
     methods: {
         getNowTime(){

@@ -52,11 +52,20 @@ export default {
     .the-message {
         width: 100vw;
         height: 100vh;
-        background-color: rgba(122, 122, 122,.3);
+        background-color: rgba(122, 122, 122, .6);
         // background-color: transparent;
         position: fixed;
         left: 0;
         top: 0;
+
+        @keyframes moveUp {
+            from{
+                transform: translate(-50%,-30%);
+            }
+            to{
+                transform: translate(-50%,-50%);
+            }
+        }
 
         .message-wrap {
             width: 300px;
@@ -68,6 +77,7 @@ export default {
             top: 50%;
             transform: translate(-50%,-50%);
             cursor: default;
+            animation: moveUp .5s ease-out;
 
             display: flex;
             justify-content: center;
